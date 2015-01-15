@@ -5,7 +5,7 @@ source(file="config.R")
 CSVdata <- read.csv(CSVfile, sep = ";", header = TRUE)
 
 # Installing party (warning: gcc-fortran is needed)
-# install.packages('party')
+install.packages('party')
 library('party')
 
 # Building query
