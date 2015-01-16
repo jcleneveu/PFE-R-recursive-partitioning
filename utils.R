@@ -11,7 +11,7 @@ analyseCriterions <- function(columns, tree){
   if(last_significant$value > criterion_threshold) {
     if( ! tree$terminal) {
       left <- analyseCriterions(columns, tree$left)
-      right <- analyseCriterions(columns, tree$left)
+      right <- analyseCriterions(columns, tree$right)
       if(left$value < right$value) {
         last_significant <- left
       } else {
