@@ -9,5 +9,8 @@ CSVdata <- read.csv(CSVfile, sep = ";", header = TRUE)
 install.packages('party')
 library('party')
 
-# We perform our ctree analyse to remove the weakest dataset
-columns <- analyse_ctree(columns, referencial, CSVdata)
+# We loop to remove less significant dataset from columns
+# until we reach max_nb_parameters
+while(length(columns) > max_nb_parameters) {
+  columns <- analyse_ctree(columns, referencial, CSVdata)  
+}
