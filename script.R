@@ -5,7 +5,7 @@ source(file="utils.R")
 # Reading CSV input file
 CSVdata <- read.csv(CSVfile, sep = ";", header = TRUE)
 
-# Installing party (warning: gcc-fortran is needed)
+# Installing and loading party (warning: gcc-fortran is needed)
 install.packages('party')
 library('party')
 
@@ -14,3 +14,8 @@ library('party')
 while(length(columns) > max_nb_parameters) {
   columns <- analyse_ctree(columns, referencial, CSVdata)  
 }
+
+# We get the result ctree from final dataset and print/plot it
+result <- do_ctree(columns, referencial, CSVdata)
+print(result)
+plot(result)

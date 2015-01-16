@@ -32,24 +32,27 @@ build_query <- function(columns) {
   return(query)
 }
 
-# This method is the core of the program: it does a ctree from data
-# using party library and return the datasets without the less significant
-analyse_ctree <- function(columns, referencial, CSVdata) {
+# This function build the query and get the tree from columns, referencial and data
+do_ctree <- function(columns, referencial, CSVdata) {
   # Building query
   query <- build_query(columns)
   
   # Executing query and getting data analysis
   formula <- paste(referencial, query, sep = " ~ ")
-  fit.ctree <- ctree(eval(parse(text=formula)), data=CSVdata)
-  
-  # Plot and print data
-  fit.ctree
-  plot(fit.ctree)
+  return(ctree(eval(parse(text=formula)), data=CSVdata))
+}
+
+# This method is the core of the program: it creates a ctree from data
+# using party library, analyse the result and return the datasets
+# without the less significant parameter
+analyse_ctree <- function(columns, referencial, CSVdata) {
+  # We get the ctree
+  fit.ctree <- do_ctree(columns, referencial, CSVdata)
   
   # Anaylse of criterions to determine less significant criterion
   last_significant <- analyseCriterions(columns, fit.ctree@tree)
   
-  # We remove the last significant data based on criterion
+  # We remove the last significant data based on criterion only if under threshold
   if(last_significant$value < criterion_threshold && length(columns) > min_nb_parameters) {
     columns <- columns[-which(columns == last_significant$name)]
   }
