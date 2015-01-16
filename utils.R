@@ -8,6 +8,17 @@ analyseCriterions <- function(columns, tree){
       last_significant$name = c;
     }
   }
+  if(last_significant$value > criterion_threshold) {
+    if( ! tree$terminal) {
+      left <- analyseCriterions(columns, tree$left)
+      right <- analyseCriterions(columns, tree$left)
+      if(left$value < right$value) {
+        last_significant <- left
+      } else {
+        last_significant <- right
+      }
+    }
+  }
   return(last_significant)
 }
 
