@@ -8,7 +8,7 @@ print(prediction)
 ################################################
 ##Forecasting en fonction des données précédentes
 #library(forecast)
-#sensor <- ts(exogene$Cours) 
+#sensor <- ts(CSVdata$Rate) 
 #fit <- auto.arima(sensor)
 ##Possible de faire une prédiction sur plus de 20 points (second paramètre)
 #fcast <- forecast(fit,20)
