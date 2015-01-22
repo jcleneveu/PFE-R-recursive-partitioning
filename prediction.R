@@ -77,20 +77,3 @@ lines(measure,col="green")
 title('Real rate (Red) and Prediction (Green) / Date')
 title(ylab = "Rate") ## draw the axis labels
 title(xlab = "Date") ## push this one down a bit in larger margin
-
-#########################################
-####### PREVIOUS DATA FORECASTING #######
-#########################################
-
-#Forecasting en fonction des donnees precedentes
-library(forecast)
-sensor <- ts(CSVdata$Rate) 
-fit <- auto.arima(sensor)
-#Possible de faire une prediction sur plus de 20 points (second paramatre)
-fcast <- forecast(fit,20)
-fcast
-CSVdata$Date <- as.Date(CSVdata$Date, "%d/%m/%Y")
-plot(fcast,col="violet", ann = FALSE)
-title("Forecasting")
-grid()
-
