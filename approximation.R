@@ -8,8 +8,11 @@ source(file="prediction.R")
 #Calculate and plot the approximation
 CSVdata$Date <- as.Date(CSVdata$Date, "%d/%m/%Y")
 approxCSV <- approx(measure)
+approxCSVConstant <- approx(measure, method="constant")
 plot(CSVdata$Rate,type="l",col="red",ann = FALSE)
 lines(approxCSV,col="blue")
+lines(approxCSVConstant,col="green")
+
 title('Real rate (Red) and Approx (Blue) / Date')
 title(ylab = "Rate") ## draw the axis labels
 title(xlab = "Date") ## push this one down a bit in larger margin
@@ -37,6 +40,3 @@ for ( i in 2:length(approxCSV$x)) {
 sprintf("Minimum error : %f, Index : %d, Date %s", min(erreur), which.min(erreur), CSVdata$Date[which.min(erreur)])
 sprintf("Maximum error : %f, Index : %d, Date %s", max(erreur), which.max(erreur), CSVdata$Date[which.max(erreur)])
 sprintf("Average error : %f", mean(erreur))
-
-plot(erreur,col="yellow")
-title('Error / Date')
