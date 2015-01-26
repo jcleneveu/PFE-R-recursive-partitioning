@@ -1,5 +1,5 @@
 # Include ctree main program
-source(file="script.R")
+source(file="prediction.R")
 
 #########################################
 ####### APPROXIMATION ###################
