@@ -5,6 +5,8 @@ source(file="script.R")
 ####### PREDICTION  #########
 #############################
 
+CSVdata<- read.csv(CSVfile2, sep = ";", header = TRUE)
+
 #First iteration, we instatiate the vector true_value 
 true_value <- CSVdata$Rate[1]
 

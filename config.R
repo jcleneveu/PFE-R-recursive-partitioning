@@ -2,6 +2,7 @@
 
 # Path settings
 CSVfile <- "data.csv"
+CSVfile2 <- "data2.csv"
 
 # Columns in your file to analyse
 columns <- c("Google.Trends",
