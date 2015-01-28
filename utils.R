@@ -58,3 +58,30 @@ analyse_ctree <- function(columns, referencial, CSVdata) {
   }
   return(columns)
 }
+
+
+getRatioMatrix <- function(CSVdata, columns) {
+  data <- matrix(1,length(CSVdata$Rate), length(CSVdata))
+  for(c in 1:length(columns)) {
+    for(l in 1:length(CSVdata$Rate)) {
+      data[l,c] <- CSVdata$Rate[l] / CSVdata[l, columns[c]]
+    }
+  }
+  return(data)
+}
+
+getMeanList <- function(data, columns) {
+  mean <- list()
+  for(c in 1:length(columns)) {
+    mean <- c(mean, mean(data[,c]))
+  }
+  return(mean)
+}
+
+getApproximation <- function(columns, CSVdata, mean) {
+  approx <- list()
+  for(c in 1:length(columns)) {
+    approx <- c(approx, lapply(100 * abs(CSVdata$Rate - (CSVdata[columns[c]] * mean[c])) / CSVdata$Rate, mean))
+  }
+  return(approx)
+}
